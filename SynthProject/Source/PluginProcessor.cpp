@@ -20,7 +20,7 @@ SynthProjectAudioProcessor::SynthProjectAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ), apvts (*this, nullptr, "Parameters", createParameters())
 #endif
 {
     synth.addSound (new SynthSound());
@@ -144,6 +144,9 @@ void SynthProjectAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
+    
+    auto gain = apvts.getRawParameterValue("GAIN");
+    gain->load();
 
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
@@ -191,4 +194,14 @@ void SynthProjectAudioProcessor::setStateInformation (const void* data, int size
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new SynthProjectAudioProcessor();
+}
+
+
+juce::AudioProcessorValueTreeState::ParameterLayout SynthProjectAudioProcessor::createParameters()
+{
+    std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+    
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("GAIN", "Gain", 0.0f, 1.0f, 0.75f));
+    
+    return { params.begin(), params.end() };
 }
