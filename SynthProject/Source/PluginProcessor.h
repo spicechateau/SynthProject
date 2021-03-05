@@ -59,9 +59,9 @@ public:
     
 
 private:
-    juce::AudioProcessorValueTreeState::ParameterLayout createParameters();
-    
     juce::Synthesiser synth;
+    
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameters();
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SynthProjectAudioProcessor)

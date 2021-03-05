@@ -25,8 +25,30 @@ public:
     void resized() override;
 
 private:
-    juce::Slider gainSlider;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> gainSliderAttachment;
+    using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
+    using ComboBoxAttachment = juce::AudioProcessorValueTreeState::ComboBoxAttachment;
+    
+    void setSliderParams (juce::Slider& slider);
+    
+    // Gen Params
+    
+    // Osc
+    juce::ComboBox osc1Selector;
+    
+    std::unique_ptr<ComboBoxAttachment> osc1SelectorAttachment;
+    
+    // ADSR
+    juce::Slider attackSlider;
+    juce::Slider decaySlider;
+    juce::Slider sustainSlider;
+    juce::Slider releaseSlider;
+
+    std::unique_ptr<SliderAttachment> attackAttachment;
+    std::unique_ptr<SliderAttachment> decayAttachment;
+    std::unique_ptr<SliderAttachment> sustainAttachment;
+    std::unique_ptr<SliderAttachment> releaseAttachment;
+
+    // Output Params
     
     SynthProjectAudioProcessor& audioProcessor;
 

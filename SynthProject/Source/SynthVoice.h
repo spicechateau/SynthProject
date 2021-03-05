@@ -24,14 +24,19 @@ public:
     void prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels);
     void renderNextBlock (juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples) override;
     
+    void updateADSR (const float attack, const float decay, const float sustain, const float release);
+    
 private:
     juce::ADSR adsr;
     juce::ADSR::Parameters adsrParams;
+    juce::AudioBuffer<float> synthBuffer;
     
-    juce::dsp::Oscillator<float> osc{[](float x) {return x / juce::MathConstants<float>::pi;}, 200};
+    juce::dsp::Oscillator<float> osc1 { [](float x) {return x / juce::MathConstants<float>::pi;}, 200};
     // return std::sin(x); // Sin wave
     // return x / juce::MathConstants<float>::pi; // Saw
     // return x < 0.0f ? -1.0f : 1.0f; // Square
+    
+    
     juce::dsp::Gain<float> gain;
     
     bool isPrepared {false};
