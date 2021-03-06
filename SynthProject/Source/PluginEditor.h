@@ -29,26 +29,66 @@ private:
     using ComboBoxAttachment = juce::AudioProcessorValueTreeState::ComboBoxAttachment;
     
     void setSliderParams (juce::Slider& slider);
+    void setComboBoxParams (juce::ComboBox& comboBox);
     
     // Gen Params
+    juce::ComboBox stabilityRateSelector;
+    
+    juce::Slider stabilitySlider;
+    
+    std::unique_ptr<ComboBoxAttachment> stabilityRateSelectorAttachment;
+    
+    std::unique_ptr<SliderAttachment> stabilitySliderAttachment;
     
     // Osc
     juce::ComboBox osc1Selector;
+    juce::ComboBox osc2Selector;
+    
+    juce::Slider osc1GainSlider;
+    juce::Slider osc2GainSlider;
+    juce::Slider subOscGainSlider;
+    juce::Slider noiseGainSlider;
     
     std::unique_ptr<ComboBoxAttachment> osc1SelectorAttachment;
+    std::unique_ptr<ComboBoxAttachment> osc2SelectorAttachment;
+    
+    std::unique_ptr<SliderAttachment> osc1GainAttachment;
+    std::unique_ptr<SliderAttachment> osc2GainAttachment;
+    std::unique_ptr<SliderAttachment> subOscGainAttachment;
+    std::unique_ptr<SliderAttachment> noiseGainAttachment;
+    
+    // Pulse Width
     
     // ADSR
-    juce::Slider attackSlider;
-    juce::Slider decaySlider;
-    juce::Slider sustainSlider;
-    juce::Slider releaseSlider;
+    juce::Slider ampAttackSlider;
+    juce::Slider ampDecaySlider;
+    juce::Slider ampSustainSlider;
+    juce::Slider ampReleaseSlider;
 
-    std::unique_ptr<SliderAttachment> attackAttachment;
-    std::unique_ptr<SliderAttachment> decayAttachment;
-    std::unique_ptr<SliderAttachment> sustainAttachment;
-    std::unique_ptr<SliderAttachment> releaseAttachment;
+    std::unique_ptr<SliderAttachment> ampAttackAttachment;
+    std::unique_ptr<SliderAttachment> ampDecayAttachment;
+    std::unique_ptr<SliderAttachment> ampSustainAttachment;
+    std::unique_ptr<SliderAttachment> ampReleaseAttachment;
+    
+    // Filter
+    
+    juce::Slider filAttackSlider;
+    juce::Slider filDecaySlider;
+    juce::Slider filSustainSlider;
+    juce::Slider filReleaseSlider;
+
+    std::unique_ptr<SliderAttachment> filAttackAttachment;
+    std::unique_ptr<SliderAttachment> filDecayAttachment;
+    std::unique_ptr<SliderAttachment> filSustainAttachment;
+    std::unique_ptr<SliderAttachment> filReleaseAttachment;
 
     // Output Params
+    
+    juce::Slider preSatSlider;
+    juce::Slider outputGainSlider;
+    
+    std::unique_ptr<SliderAttachment> preSatAttachment;
+    std::unique_ptr<SliderAttachment> outputGainAttachment;
     
     SynthProjectAudioProcessor& audioProcessor;
 
